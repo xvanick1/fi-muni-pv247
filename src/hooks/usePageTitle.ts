@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
 const usePageTitle = (title: string) => {
+	const myName = 'Maria Tortelini';
 	useEffect(() => {
-		document.title = `${title} | Tic Tac Toe`;
+		document.title = `${title} | ${myName}`;
 	}, [title]);
 };
 
