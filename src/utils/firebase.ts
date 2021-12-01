@@ -17,12 +17,12 @@ import {
 
 // Initialize Firebase
 initializeApp({
-	apiKey: 'AIzaSyC9s7Qy1aC0gFZgAmzlbcMJ-zbJuNfB74w',
-	authDomain: 'pv247project.firebaseapp.com',
-	projectId: 'pv247project',
-	storageBucket: 'pv247project.appspot.com',
-	messagingSenderId: '234973118009',
-	appId: '1:234973118009:web:75331a4c71990c4fec17e8'
+	apiKey: 'AIzaSyBg3n_AeSukEU8SPnMF9-VpaxPcvlNgrf8',
+	authDomain: 'pv247finalproject.firebaseapp.com',
+	projectId: 'pv247finalproject',
+	storageBucket: 'pv247finalproject.appspot.com',
+	messagingSenderId: '69087849182',
+	appId: '1:69087849182:web:90f9f8841745a6f9f6f04f'
 });
 
 // Authentication
