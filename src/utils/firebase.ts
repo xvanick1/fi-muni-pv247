@@ -46,17 +46,17 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 // Firestore
 const db = getFirestore();
 
-// Reviews collection
-export type Review = {
+// Feedbacks collection
+export type Feedback = {
 	by: string;
-	stars: number;
-	description?: string;
+	email: string;
+	text: string;
 };
 
-export const reviewsCollection = collection(
+export const feedbacksCollection = collection(
 	db,
-	'reviews'
-) as CollectionReference<Review>;
+	'feedbacks'
+) as CollectionReference<Feedback>;
 
-export const reviewsDocument = (id: string) =>
-	doc(db, 'reviews', id) as DocumentReference<Review>;
+export const feedbacksDocument = (id: string) =>
+	doc(db, 'feedbacks', id) as DocumentReference<Feedback>;
