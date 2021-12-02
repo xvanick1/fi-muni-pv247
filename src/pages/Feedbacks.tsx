@@ -29,9 +29,14 @@ const Feedbacks = () => {
 	return (
 		<>
 			<Box
-				sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					width: '100%',
+					mb: 2
+				}}
 			>
-				<Typography variant="h4">Customer Feedback</Typography>
+				<Typography variant="h4">Client Feedback</Typography>
 				<AddFeedback>
 					{open => (
 						<Button onClick={open} variant="contained" size="small">
@@ -40,9 +45,9 @@ const Feedbacks = () => {
 					)}
 				</AddFeedback>
 			</Box>
-			{feedbacks.map((r, i) => (
-				<FeedbackPreview key={i} {...r} />
-			))}
+			{feedbacks.length > 0
+				? feedbacks.map((r, i) => <FeedbackPreview key={i} {...r} />)
+				: 'No feedbacks yet'}
 		</>
 	);
 };

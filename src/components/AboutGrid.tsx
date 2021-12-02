@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import Bio from './Bio';
 import Excerpt from './TextModal';

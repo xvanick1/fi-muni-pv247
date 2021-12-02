@@ -82,6 +82,8 @@ const AddFeedback = ({ children }: Props) => {
 					<TextField
 						label="Feedback"
 						autoComplete="off"
+						multiline
+						rows={3}
 						fullWidth
 						{...feedbackTextProps}
 					/>

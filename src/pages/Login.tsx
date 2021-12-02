@@ -39,8 +39,10 @@ const Login = () => {
 				display: 'flex',
 				flexDirection: 'column',
 				width: '100%',
+				maxWidth: '500px',
 				p: 4,
-				gap: 2
+				gap: 2,
+				m: 'auto'
 			}}
 		>
 			<Typography variant="h4" component="h2" textAlign="center" mb={3}>

@@ -13,7 +13,8 @@ const FeedbackPreview: FC<Feedback> = ({ by, text }) => {
 				flexDirection: 'column',
 				justifyContent: 'space-between',
 				width: '100%',
-				textAlign: 'left'
+				textAlign: 'left',
+				mb: 3
 			}}
 		>
 			<CardContent>
