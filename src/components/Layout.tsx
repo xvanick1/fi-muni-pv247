@@ -9,7 +9,7 @@ import './Layout.css';
 const Layout: FC = ({ children }) => (
 	<>
 		<AppBar position="fixed">
-			<Container maxWidth="sm">
+			<Container maxWidth="md">
 				<Toolbar disableGutters sx={{ gap: 5 }}>
 					<img height="50" src={homeLogo} alt="Logo" />
 					<Button
@@ -41,16 +41,12 @@ const Layout: FC = ({ children }) => (
 		</AppBar>
 
 		<Container
-			maxWidth="sm"
+			maxWidth="md"
 			component="main"
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-				justifyContent: 'center',
-				alignItems: 'center',
-				height: '100vh',
-				pt: 8,
-				gap: 2
+				pt: 8
 			}}
 		>
 			{children}
