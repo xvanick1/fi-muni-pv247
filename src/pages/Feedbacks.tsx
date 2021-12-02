@@ -34,7 +34,7 @@ const Feedbacks = () => {
 				<Typography variant="h4">Customer Feedback</Typography>
 				<AddFeedback>
 					{open => (
-						<Button onClick={open} variant="contained" size="small">
+						<Button onClick={open} variant="text" size="small">
 							Add Feedback
 						</Button>
 					)}

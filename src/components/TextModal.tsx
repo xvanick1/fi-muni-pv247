@@ -9,7 +9,7 @@ import { ReactNode } from 'react';
 
 type ExcerptProps = {
 	title: string;
-	modalContent: string;
+	modalContent?: string;
 	children: ReactNode;
 };
 
