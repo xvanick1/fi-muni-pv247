@@ -12,11 +12,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
 const Bio = () => (
-	<List
-		style={{
-			backgroundColor: 'blue'
-		}}
-	>
+	<List>
 		<ListItem style={{ justifyContent: 'center' }}>
 			<ListItemAvatar style={{ justifyContent: 'center' }}>
 				<Avatar
