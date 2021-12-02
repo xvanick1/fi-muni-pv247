@@ -1,3 +1,7 @@
 .menuButton {
 	font-family: 'Times New Roman', Times, serif !important;
 }
+
+.menuButton.active {
+	color: #ad4747;
+}

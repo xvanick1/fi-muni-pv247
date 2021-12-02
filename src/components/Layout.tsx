@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AppBar, Container, Toolbar, Button } from '@mui/material';
 
 import homeLogo from '../images/homeIcon.png';
@@ -17,7 +17,9 @@ const Layout: FC = ({ children }) => (
 					<Button
 						className="menuButton"
 						style={{ backgroundColor: 'transparent' }}
-						component={Link}
+						component={NavLink}
+						exact
+						activeClassName="active"
 						to="/"
 					>
 						About me
@@ -25,7 +27,9 @@ const Layout: FC = ({ children }) => (
 					<Button
 						className="menuButton"
 						style={{ backgroundColor: 'transparent' }}
-						component={Link}
+						component={NavLink}
+						exact
+						activeClassName="active"
 						to="/portfolio"
 					>
 						Portfolio
@@ -33,7 +37,9 @@ const Layout: FC = ({ children }) => (
 					<Button
 						className="menuButton"
 						style={{ backgroundColor: 'transparent' }}
-						component={Link}
+						component={NavLink}
+						exact
+						activeClassName="active"
 						to="/feedback"
 					>
 						Feedback
