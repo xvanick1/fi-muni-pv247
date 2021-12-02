@@ -8,10 +8,12 @@ import './Layout.css';
 
 const Layout: FC = ({ children }) => (
 	<>
-		<AppBar position="fixed">
+		<AppBar position="static">
 			<Container maxWidth="md">
 				<Toolbar disableGutters sx={{ gap: 5 }}>
-					<img height="50" src={homeLogo} alt="Logo" />
+					<Link to="/">
+						<img height="50" src={homeLogo} alt="Logo" />
+					</Link>
 					<Button
 						className="menuButton"
 						style={{ backgroundColor: 'transparent' }}
@@ -46,7 +48,7 @@ const Layout: FC = ({ children }) => (
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-				pt: 8
+				pt: 3
 			}}
 		>
 			{children}

@@ -1,6 +1,7 @@
 import {
 	Avatar,
 	Divider,
+	Link,
 	List,
 	ListItem,
 	ListItemAvatar,
@@ -16,13 +17,15 @@ const Bio = () => (
 			backgroundColor: 'blue'
 		}}
 	>
-		<ListItem>
-			<ListItemAvatar>
+		<ListItem style={{ justifyContent: 'center' }}>
+			<ListItemAvatar style={{ justifyContent: 'center' }}>
 				<Avatar
 					style={{
-						height: '150px',
+						height: 'auto',
 						width: '150px',
-						justifyContent: 'center'
+						maxWidth: '90%',
+						justifyContent: 'center',
+						margin: 'auto'
 					}}
 					alt="Maria Tortelini"
 					src="https://pbs.twimg.com/media/CX83rPWWcAAoCVV?format=jpg"
@@ -43,13 +46,19 @@ const Bio = () => (
 			<ListItemIcon>
 				<PhoneIphoneIcon color="primary" />
 			</ListItemIcon>
-			<ListItemText>+421 049 123 456</ListItemText>
+			<ListItemText>
+				<Link color="primary" href="tel:+421049123456">
+					+421 049 123 456
+				</Link>
+			</ListItemText>
 		</ListItem>
 		<ListItem>
 			<ListItemIcon>
 				<AlternateEmailIcon color="primary" />
 			</ListItemIcon>
-			<ListItemText>m.tortelini@yahoo.com</ListItemText>
+			<ListItemText sx={{ overflowWrap: 'break-word' }}>
+				<Link href="mailto:m.tortelini@yahoo.com">m.tortelini@yahoo.com</Link>
+			</ListItemText>
 		</ListItem>
 	</List>
 );
