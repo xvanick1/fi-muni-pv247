@@ -1,3 +1,4 @@
+import { ReactNode, useState } from 'react';
 import { setDoc } from '@firebase/firestore';
 import {
 	Button,
@@ -8,42 +9,46 @@ import {
 	TextField,
 	Typography
 } from '@mui/material';
-import { ReactNode, useState } from 'react';
 
 import useField from '../hooks/useField';
-import { feedbacksDocument } from '../utils/firebase';
+import { portfolioItemDocument } from '../utils/firebase';
 
 type Props = {
 	children: (open: () => void) => ReactNode;
 };
 
-const AddFeedback = ({ children }: Props) => {
+const AddPortfolioItem = ({ children }: Props) => {
 	const [open, setOpen] = useState(false);
-	const [name, nameProps] = useField('name', true);
-	const [email, emailProps] = useField('email', true);
-	const [feedbackText, feedbackTextProps] = useField('feedbackText', true);
+	const [imageUrl, imageUrlProps] = useField('imageUrl', true);
+	const [referenceUrl, referenceUrlProps] = useField('referenceUrl', true);
+	const [title, titleProps] = useField('title', true);
+	const [shortDescription, shortDescriptionProps] = useField(
+		'shortDescription',
+		true
+	);
 	const [submitError, setSubmitError] = useState<string>();
 
 	// Close and reset handler
 	const closeDialog = () => {
 		setOpen(false);
-		feedbackTextProps.onChange({ target: { value: '' } } as never);
-		nameProps.onChange({ target: { value: '' } } as never);
-		emailProps.onChange({ target: { value: '' } } as never);
+		shortDescriptionProps.onChange({ target: { value: '' } } as never);
+		imageUrlProps.onChange({ target: { value: '' } } as never);
+		titleProps.onChange({ target: { value: '' } } as never);
 		setSubmitError(undefined);
 	};
 
 	const handleSubmit = async () => {
-		if (!email || !name || !feedbackText) {
+		if (!title || !imageUrl || !shortDescription) {
 			setSubmitError('Fill all required fields!');
 			return;
 		}
 
 		try {
-			await setDoc(feedbacksDocument(email), {
-				by: name,
-				email,
-				text: feedbackText
+			await setDoc(portfolioItemDocument(title), {
+				imageUrl,
+				title,
+				referenceUrl,
+				shortDescription
 			});
 		} catch (err) {
 			setSubmitError((err as { message?: string })?.message ?? 'Unknown error');
@@ -54,7 +59,7 @@ const AddFeedback = ({ children }: Props) => {
 		<>
 			{children(() => setOpen(true))}
 			<Dialog open={open} onClose={closeDialog}>
-				<DialogTitle>Add Feedback</DialogTitle>
+				<DialogTitle>Add Portfolio Item</DialogTitle>
 				<DialogContent
 					sx={{
 						display: 'flex',
@@ -66,25 +71,32 @@ const AddFeedback = ({ children }: Props) => {
 					}}
 				>
 					<TextField
-						label="Name"
+						label="Image URL"
 						autoComplete="off"
 						fullWidth
-						{...nameProps}
+						{...imageUrlProps}
 						sx={{ marginTop: 1 }}
 					/>
 					<TextField
-						label="Email"
+						label="Reference URL"
 						autoComplete="off"
 						fullWidth
-						{...emailProps}
+						{...referenceUrlProps}
+						sx={{ marginTop: 1 }}
 					/>
 					<TextField
-						label="Feedback"
+						label="title"
+						autoComplete="off"
+						fullWidth
+						{...titleProps}
+					/>
+					<TextField
+						label="Short description"
 						autoComplete="off"
 						multiline
 						rows={3}
 						fullWidth
-						{...feedbackTextProps}
+						{...shortDescriptionProps}
 					/>
 				</DialogContent>
 				<DialogActions>
@@ -108,4 +120,4 @@ const AddFeedback = ({ children }: Props) => {
 		</>
 	);
 };
-export default AddFeedback;
+export default AddPortfolioItem;

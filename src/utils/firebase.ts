@@ -17,12 +17,12 @@ import {
 
 // Initialize Firebase
 initializeApp({
-	apiKey: 'AIzaSyBg3n_AeSukEU8SPnMF9-VpaxPcvlNgrf8',
-	authDomain: 'pv247finalproject.firebaseapp.com',
-	projectId: 'pv247finalproject',
-	storageBucket: 'pv247finalproject.appspot.com',
-	messagingSenderId: '69087849182',
-	appId: '1:69087849182:web:90f9f8841745a6f9f6f04f'
+	apiKey: 'AIzaSyCsDHN6jk4KxrVsvL2nc3UrdA2TJcVAbSE',
+	authDomain: 'pv247finalproject2.firebaseapp.com',
+	projectId: 'pv247finalproject2',
+	storageBucket: 'pv247finalproject2.appspot.com',
+	messagingSenderId: '414173149598',
+	appId: '1:414173149598:web:e1cf568486de762560fe8f'
 });
 
 // Authentication
@@ -60,3 +60,18 @@ export const feedbacksCollection = collection(
 
 export const feedbacksDocument = (id: string) =>
 	doc(db, 'feedbacks', id) as DocumentReference<Feedback>;
+
+export type PortfolioItem = {
+	imageUrl: string;
+	referenceUrl: string;
+	title: string;
+	shortDescription: string;
+};
+
+export const portfolioItemsCollection = collection(
+	db,
+	'portfolioItems'
+) as CollectionReference<PortfolioItem>;
+
+export const portfolioItemDocument = (id: string) =>
+	doc(db, 'portfolioItems', id) as DocumentReference<PortfolioItem>;
