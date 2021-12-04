@@ -1,17 +1,18 @@
 import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
-	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut as authSignOut,
 	onAuthStateChanged,
 	User
 } from 'firebase/auth';
 import {
+	addDoc,
 	collection,
 	CollectionReference,
 	doc,
 	DocumentReference,
+	getDocs,
 	getFirestore
 } from 'firebase/firestore';
 
@@ -27,10 +28,6 @@ initializeApp({
 
 // Authentication
 const auth = getAuth();
-
-// Sign up handler
-export const signUp = (email: string, password: string) =>
-	createUserWithEmailAndPassword(auth, email, password);
 
 // Sign in handler
 export const signIn = (email: string, password: string) =>
@@ -75,3 +72,8 @@ export const portfolioItemsCollection = collection(
 
 export const portfolioItemDocument = (id: string) =>
 	doc(db, 'portfolioItems', id) as DocumentReference<PortfolioItem>;
+
+export const addPortfolioItem = (item: PortfolioItem) =>
+	addDoc(collection(db, 'portfolioItems'), item);
+
+export const getPortfolioItems = getDocs(collection(db, 'portfolioItems'));

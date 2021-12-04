@@ -44,10 +44,12 @@ const AddFeedback = ({ children }: Props) => {
 				by: name,
 				email,
 				text: feedbackText
-			});
+			}).then(() => closeDialog());
 		} catch (err) {
 			setSubmitError((err as { message?: string })?.message ?? 'Unknown error');
+			return;
 		}
+		closeDialog();
 	};
 
 	return (

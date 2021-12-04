@@ -1,3 +1,4 @@
+import { DocumentData, setDoc } from '@firebase/firestore';
 import { ReactNode, useState } from 'react';
 import {
 	Button,
@@ -10,45 +11,44 @@ import {
 } from '@mui/material';
 
 import useField from '../hooks/useField';
-import { addPortfolioItem } from '../utils/firebase';
+import { portfolioItemDocument } from '../utils/firebase';
 
 type Props = {
 	children: (open: () => void) => ReactNode;
+	doc: DocumentData;
 };
 
-const AddPortfolioItem = ({ children }: Props) => {
+const PortfolioEditModal = ({ children, doc }: Props) => {
 	const [open, setOpen] = useState(false);
-	const [imageUrl, imageUrlProps] = useField('imageUrl', true);
-	const [referenceUrl, referenceUrlProps] = useField('referenceUrl', true);
-	const [title, titleProps] = useField('title', true);
+	const [submitError, setSubmitError] = useState<string>();
+	const [imageUrl, imageUrlProps] = useField(
+		'imageUrl',
+		true,
+		doc.data().imageUrl
+	);
+	const [referenceUrl, referenceUrlProps] = useField(
+		'referenceUrl',
+		true,
+		doc.data().referenceUrl
+	);
+	const [title, titleProps] = useField('title', true, doc.data().title);
 	const [shortDescription, shortDescriptionProps] = useField(
 		'shortDescription',
-		true
+		true,
+		doc.data().shortDescription
 	);
-	const [submitError, setSubmitError] = useState<string>();
 
-	// Close and reset handler
 	const closeDialog = () => {
 		setOpen(false);
-		shortDescriptionProps.onChange({ target: { value: '' } } as never);
-		imageUrlProps.onChange({ target: { value: '' } } as never);
-		titleProps.onChange({ target: { value: '' } } as never);
-		referenceUrlProps.onChange({ target: { value: '' } } as never);
-
 		setSubmitError(undefined);
 	};
 
 	const handleSubmit = async () => {
-		if (!title || !imageUrl || !shortDescription) {
-			setSubmitError('Fill all required fields!');
-			return;
-		}
-
 		try {
-			await addPortfolioItem({
+			await setDoc(portfolioItemDocument(doc.id), {
 				imageUrl,
-				title,
 				referenceUrl,
+				title,
 				shortDescription
 			}).then(() => closeDialog());
 		} catch (err) {
@@ -60,7 +60,7 @@ const AddPortfolioItem = ({ children }: Props) => {
 		<>
 			{children(() => setOpen(true))}
 			<Dialog open={open} onClose={closeDialog}>
-				<DialogTitle>Add Portfolio Item</DialogTitle>
+				<DialogTitle>Edit Portfolio Item</DialogTitle>
 				<DialogContent
 					sx={{
 						display: 'flex',
@@ -121,4 +121,4 @@ const AddPortfolioItem = ({ children }: Props) => {
 		</>
 	);
 };
-export default AddPortfolioItem;
+export default PortfolioEditModal;

@@ -6,6 +6,7 @@ import usePageTitle from '../hooks/usePageTitle';
 import { Feedback, feedbacksCollection } from '../utils/firebase';
 import FeedbackPreview from '../components/FeedbackPreview';
 import AddFeedback from '../components/AddFeedback';
+import useLoggedInUser from '../hooks/useLoggedInUser';
 
 //feedbacks added by 3rd party, deletable by owner
 
@@ -13,6 +14,7 @@ const Feedbacks = () => {
 	usePageTitle('Feedback');
 
 	const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+	const user = useLoggedInUser();
 
 	useEffect(() => {
 		// Call onSnapshot() to listen to changes
@@ -37,13 +39,15 @@ const Feedbacks = () => {
 				}}
 			>
 				<Typography variant="h4">Client Feedback</Typography>
-				<AddFeedback>
-					{open => (
-						<Button onClick={open} variant="text" size="small">
-							Add Feedback
-						</Button>
-					)}
-				</AddFeedback>
+				{user && (
+					<AddFeedback>
+						{open => (
+							<Button onClick={open} variant="text" size="small">
+								Add Feedback
+							</Button>
+						)}
+					</AddFeedback>
+				)}
 			</Box>
 			{feedbacks.length > 0
 				? feedbacks.map((r, i) => <FeedbackPreview key={i} {...r} />)

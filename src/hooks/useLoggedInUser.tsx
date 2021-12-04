@@ -21,7 +21,7 @@ export const UserProvider: FC = ({ children }) => {
 	);
 };
 
-export const useLoggedInUser = () => {
+const useLoggedInUser = () => {
 	const [user, setUser] = useContext(UserContext);
 
 	useEffect(() => {
@@ -30,3 +30,4 @@ export const useLoggedInUser = () => {
 
 	return user;
 };
+export default useLoggedInUser;

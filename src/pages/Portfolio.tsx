@@ -1,20 +1,25 @@
 import { onSnapshot } from '@firebase/firestore';
 import { Button, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { QueryDocumentSnapshot } from 'firebase/firestore';
 
 import PortfolioItemPreview from '../components/PortfolioItemPreview';
 import AddPortfolioItem from '../components/AddPortfolioItem';
 import usePageTitle from '../hooks/usePageTitle';
 import { PortfolioItem, portfolioItemsCollection } from '../utils/firebase';
+import useLoggedInUser from '../hooks/useLoggedInUser';
 
 const Portfolio = () => {
 	usePageTitle('Portfolio');
 
-	const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
+	const [portfolioItems, setPortfolioItems] = useState<
+		QueryDocumentSnapshot<PortfolioItem>[]
+	>([]);
+	const user = useLoggedInUser();
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(portfolioItemsCollection, snapshot => {
-			setPortfolioItems(snapshot.docs.map(doc => doc.data()));
+			setPortfolioItems(snapshot.docs);
 		});
 
 		return () => {
@@ -36,16 +41,20 @@ const Portfolio = () => {
 			>
 				<Typography variant="h4">My work</Typography>
 
-				<AddPortfolioItem>
-					{open => (
-						<Button onClick={open} variant="text" size="small">
-							Add Portfolio Item
-						</Button>
-					)}
-				</AddPortfolioItem>
+				{user && (
+					<AddPortfolioItem>
+						{open => (
+							<Button onClick={open} variant="text" size="small">
+								Add Portfolio Item
+							</Button>
+						)}
+					</AddPortfolioItem>
+				)}
 			</Grid>
 			{portfolioItems.length > 0
-				? portfolioItems.map((r, i) => <PortfolioItemPreview key={i} {...r} />)
+				? portfolioItems.map(doc => (
+						<PortfolioItemPreview key={doc.id} doc={doc} />
+				  ))
 				: 'No portfolio items yet'}
 		</Grid>
 	);
