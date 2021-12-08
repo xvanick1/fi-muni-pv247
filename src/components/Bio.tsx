@@ -11,6 +11,8 @@ import {
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
+import tortela from '../images/tortela.png';
+
 const Bio = () => (
 	<List>
 		<ListItem style={{ justifyContent: 'center' }}>
@@ -24,7 +26,7 @@ const Bio = () => (
 						margin: 'auto'
 					}}
 					alt="Maria Tortelini"
-					src="https://pbs.twimg.com/media/CX83rPWWcAAoCVV?format=jpg"
+					src={tortela}
 				/>
 			</ListItemAvatar>
 		</ListItem>
