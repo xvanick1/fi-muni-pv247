@@ -10,31 +10,34 @@ import { FC } from 'react';
 import { Delete } from '@mui/icons-material';
 
 import { Feedback } from '../utils/firebase';
+import useLoggedInUser from '../hooks/useLoggedInUser';
 
 import DeleteModal from './DeleteModal';
 
 const FeedbackPreview: FC<Feedback> = ({ by, text, email }) => {
-	console.log('asdf');
+	const user = useLoggedInUser();
 
 	return (
 		<Grid item xs={12} style={{ position: 'relative' }}>
-			<Box
-				style={{
-					position: 'absolute',
-					top: 0,
-					right: 0,
-					textAlign: 'right',
-					backgroundColor: '#ffc0cb42'
-				}}
-			>
-				<DeleteModal collectionName="feedback" id={email}>
-					{open => (
-						<IconButton onClick={open} color="error" aria-label="delete">
-							<Delete />
-						</IconButton>
-					)}
-				</DeleteModal>
-			</Box>
+			{user && (
+				<Box
+					style={{
+						position: 'absolute',
+						top: 0,
+						right: 0,
+						textAlign: 'right',
+						backgroundColor: '#ffc0cb42'
+					}}
+				>
+					<DeleteModal collectionName="feedback" id={email}>
+						{open => (
+							<IconButton onClick={open} color="error" aria-label="delete">
+								<Delete />
+							</IconButton>
+						)}
+					</DeleteModal>
+				</Box>
+			)}
 			<Card
 				sx={{
 					display: 'flex',

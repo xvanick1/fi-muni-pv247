@@ -23,7 +23,7 @@ const Login = () => {
 			onSubmit={async (e: FormEvent) => {
 				e.preventDefault();
 				try {
-					signIn(email, password);
+					await signIn(email, password);
 					push('/');
 				} catch (err) {
 					setSubmitError(
