@@ -39,15 +39,13 @@ const Feedbacks = () => {
 				}}
 			>
 				<Typography variant="h4">Client Feedback</Typography>
-				{user && (
-					<AddFeedback>
-						{open => (
-							<Button onClick={open} variant="text" size="small">
-								Add Feedback
-							</Button>
-						)}
-					</AddFeedback>
-				)}
+				<AddFeedback>
+					{open => (
+						<Button onClick={open} variant="text" size="small">
+							Add Feedback
+						</Button>
+					)}
+				</AddFeedback>
 			</Box>
 			{feedbacks.length > 0
 				? feedbacks.map((r, i) => <FeedbackPreview key={i} {...r} />)
