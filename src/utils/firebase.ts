@@ -77,3 +77,21 @@ export const addPortfolioItem = (item: PortfolioItem) =>
 	addDoc(collection(db, 'portfolioItems'), item);
 
 export const getPortfolioItems = getDocs(collection(db, 'portfolioItems'));
+
+export type AboutItem = {
+	title: string;
+	shortDescription: string;
+};
+
+export const aboutItemsCollection = collection(
+	db,
+	'aboutItems'
+) as CollectionReference<AboutItem>;
+
+export const aboutItemDocument = (id: string) =>
+	doc(db, 'aboutItems', id) as DocumentReference<AboutItem>;
+
+export const addAboutItem = (item: AboutItem) =>
+	addDoc(collection(db, 'aboutItems'), item);
+
+export const getAboutItems = getDocs(collection(db, 'aboutItems'));

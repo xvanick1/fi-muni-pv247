@@ -11,26 +11,16 @@ import {
 } from '@mui/material';
 
 import useField from '../hooks/useField';
-import { portfolioItemDocument } from '../utils/firebase';
+import { aboutItemDocument } from '../utils/firebase';
 
 type Props = {
 	children: (open: () => void) => ReactNode;
 	doc: DocumentData;
 };
 
-const PortfolioEditModal = ({ children, doc }: Props) => {
+const EditAboutModal = ({ children, doc }: Props) => {
 	const [open, setOpen] = useState(false);
 	const [submitError, setSubmitError] = useState<string>();
-	const [imageUrl, imageUrlProps] = useField(
-		'imageUrl',
-		true,
-		doc.data().imageUrl
-	);
-	const [referenceUrl, referenceUrlProps] = useField(
-		'referenceUrl',
-		true,
-		doc.data().referenceUrl
-	);
 	const [title, titleProps] = useField('title', true, doc.data().title);
 	const [shortDescription, shortDescriptionProps] = useField(
 		'shortDescription',
@@ -45,9 +35,7 @@ const PortfolioEditModal = ({ children, doc }: Props) => {
 
 	const handleSubmit = async () => {
 		try {
-			await setDoc(portfolioItemDocument(doc.id), {
-				imageUrl,
-				referenceUrl,
+			await setDoc(aboutItemDocument(doc.id), {
 				title,
 				shortDescription
 			}).then(() => closeDialog());
@@ -60,7 +48,7 @@ const PortfolioEditModal = ({ children, doc }: Props) => {
 		<>
 			{children(() => setOpen(true))}
 			<Dialog open={open} onClose={closeDialog}>
-				<DialogTitle>Edit Portfolio Item</DialogTitle>
+				<DialogTitle>Edit Section Item</DialogTitle>
 				<DialogContent
 					sx={{
 						display: 'flex',
@@ -71,20 +59,6 @@ const PortfolioEditModal = ({ children, doc }: Props) => {
 						paddingTop: '50px'
 					}}
 				>
-					<TextField
-						label="Image URL"
-						autoComplete="off"
-						fullWidth
-						{...imageUrlProps}
-						sx={{ marginTop: 1 }}
-					/>
-					<TextField
-						label="Reference URL"
-						autoComplete="off"
-						fullWidth
-						{...referenceUrlProps}
-						sx={{ marginTop: 1 }}
-					/>
 					<TextField
 						label="title"
 						autoComplete="off"
@@ -121,4 +95,4 @@ const PortfolioEditModal = ({ children, doc }: Props) => {
 		</>
 	);
 };
-export default PortfolioEditModal;
+export default EditAboutModal;

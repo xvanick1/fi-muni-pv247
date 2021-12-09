@@ -14,7 +14,7 @@ import useLoggedInUser from '../hooks/useLoggedInUser';
 
 import DeleteModal from './DeleteModal';
 
-const FeedbackPreview: FC<Feedback> = ({ by, text, email }) => {
+const PreviewFeedback: FC<Feedback> = ({ by, text, email }) => {
 	const user = useLoggedInUser();
 
 	return (
@@ -25,8 +25,7 @@ const FeedbackPreview: FC<Feedback> = ({ by, text, email }) => {
 						position: 'absolute',
 						top: 0,
 						right: 0,
-						textAlign: 'right',
-						backgroundColor: '#ffc0cb42'
+						textAlign: 'right'
 					}}
 				>
 					<DeleteModal collectionName="feedback" id={email}>
@@ -61,4 +60,4 @@ const FeedbackPreview: FC<Feedback> = ({ by, text, email }) => {
 	);
 };
 
-export default FeedbackPreview;
+export default PreviewFeedback;

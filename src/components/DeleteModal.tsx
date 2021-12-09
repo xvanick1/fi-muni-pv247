@@ -9,11 +9,15 @@ import {
 } from '@mui/material';
 import { ReactNode, useState } from 'react';
 
-import { portfolioItemDocument, feedbacksDocument } from '../utils/firebase';
+import {
+	portfolioItemDocument,
+	feedbacksDocument,
+	aboutItemDocument
+} from '../utils/firebase';
 
 type Props = {
 	children: (open: () => void) => ReactNode;
-	collectionName: 'portfolioItem' | 'feedback';
+	collectionName: 'portfolioItem' | 'aboutItem' | 'feedback';
 	id: string;
 };
 
@@ -30,6 +34,8 @@ const DeleteModal = ({ children, collectionName, id }: Props) => {
 		try {
 			if (collectionName === 'portfolioItem') {
 				await deleteDoc(portfolioItemDocument(id)).then(() => closeDialog());
+			} else if (collectionName === 'aboutItem') {
+				await deleteDoc(aboutItemDocument(id)).then(() => closeDialog());
 			} else {
 				await deleteDoc(feedbacksDocument(id)).then(() => closeDialog());
 			}

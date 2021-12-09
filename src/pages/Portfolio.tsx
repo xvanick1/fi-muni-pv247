@@ -3,7 +3,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 
-import PortfolioItemPreview from '../components/PortfolioItemPreview';
+import PreviewPortfolioItem from '../components/PreviewPortfolioItem';
 import AddPortfolioItem from '../components/AddPortfolioItem';
 import usePageTitle from '../hooks/usePageTitle';
 import { PortfolioItem, portfolioItemsCollection } from '../utils/firebase';
@@ -53,7 +53,7 @@ const Portfolio = () => {
 			</Grid>
 			{portfolioItems.length > 0
 				? portfolioItems.map(doc => (
-						<PortfolioItemPreview key={doc.id} doc={doc} />
+						<PreviewPortfolioItem key={doc.id} doc={doc} />
 				  ))
 				: 'No portfolio items yet'}
 		</Grid>

@@ -16,9 +16,9 @@ import { DocumentData } from '@firebase/firestore';
 import useLoggedInUser from '../hooks/useLoggedInUser';
 
 import DeleteModal from './DeleteModal';
-import EditModal from './PortfolioEditModal';
+import EditModal from './EditPortfolioModal';
 
-const PortfolioItemPreview: FC<DocumentData> = ({ doc }) => {
+const PreviewPortfolioItem: FC<DocumentData> = ({ doc }) => {
 	const { referenceUrl, shortDescription, title, imageUrl } = doc.data();
 	const user = useLoggedInUser();
 
@@ -30,8 +30,7 @@ const PortfolioItemPreview: FC<DocumentData> = ({ doc }) => {
 						position: 'absolute',
 						top: 0,
 						right: 0,
-						textAlign: 'right',
-						backgroundColor: '#ffc0cb42'
+						textAlign: 'right'
 					}}
 				>
 					<EditModal doc={doc}>
@@ -76,4 +75,4 @@ const PortfolioItemPreview: FC<DocumentData> = ({ doc }) => {
 		</Grid>
 	);
 };
-export default PortfolioItemPreview;
+export default PreviewPortfolioItem;

@@ -4,9 +4,8 @@ import { onSnapshot } from 'firebase/firestore';
 
 import usePageTitle from '../hooks/usePageTitle';
 import { Feedback, feedbacksCollection } from '../utils/firebase';
-import FeedbackPreview from '../components/FeedbackPreview';
+import PreviewFeedback from '../components/PreviewFeedback';
 import AddFeedback from '../components/AddFeedback';
-import useLoggedInUser from '../hooks/useLoggedInUser';
 
 //feedbacks added by 3rd party, deletable by owner
 
@@ -14,7 +13,6 @@ const Feedbacks = () => {
 	usePageTitle('Feedback');
 
 	const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
-	const user = useLoggedInUser();
 
 	useEffect(() => {
 		// Call onSnapshot() to listen to changes
@@ -48,7 +46,7 @@ const Feedbacks = () => {
 				</AddFeedback>
 			</Box>
 			{feedbacks.length > 0
-				? feedbacks.map((r, i) => <FeedbackPreview key={i} {...r} />)
+				? feedbacks.map((r, i) => <PreviewFeedback key={i} {...r} />)
 				: 'No feedbacks yet'}
 		</>
 	);
