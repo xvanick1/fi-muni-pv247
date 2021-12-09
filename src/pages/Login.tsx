@@ -5,14 +5,12 @@ import { useHistory } from 'react-router';
 
 import useField from '../hooks/useField';
 import usePageTitle from '../hooks/usePageTitle';
-import { signIn, signUp } from '../utils/firebase';
+import { signIn } from '../utils/firebase';
 
 const Login = () => {
 	usePageTitle('Login');
 
 	const { push } = useHistory();
-
-	const [isSignUp, setSignUp] = useState(false);
 
 	const [email, usernameProps] = useField('email', true);
 	const [password, passwordProps] = useField('password', true);
@@ -25,9 +23,7 @@ const Login = () => {
 			onSubmit={async (e: FormEvent) => {
 				e.preventDefault();
 				try {
-					isSignUp
-						? await signUp(email, password)
-						: await signIn(email, password);
+					await signIn(email, password);
 					push('/');
 				} catch (err) {
 					setSubmitError(
@@ -39,8 +35,10 @@ const Login = () => {
 				display: 'flex',
 				flexDirection: 'column',
 				width: '100%',
+				maxWidth: '500px',
 				p: 4,
-				gap: 2
+				gap: 2,
+				m: 'auto'
 			}}
 		>
 			<Typography variant="h4" component="h2" textAlign="center" mb={3}>
@@ -66,13 +64,6 @@ const Login = () => {
 						{submitError}
 					</Typography>
 				)}
-				<Button
-					type="submit"
-					variant="outlined"
-					onClick={() => setSignUp(true)}
-				>
-					SignUp
-				</Button>
 				<Button type="submit" variant="contained">
 					SignIn
 				</Button>

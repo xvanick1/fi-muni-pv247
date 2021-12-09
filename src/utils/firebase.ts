@@ -1,36 +1,34 @@
 import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
-	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut as authSignOut,
 	onAuthStateChanged,
 	User
 } from 'firebase/auth';
 import {
+	addDoc,
 	collection,
 	CollectionReference,
 	doc,
 	DocumentReference,
-	getFirestore
+	getDocs,
+	getFirestore,
+	Timestamp
 } from 'firebase/firestore';
 
 // Initialize Firebase
 initializeApp({
-	apiKey: 'AIzaSyC9s7Qy1aC0gFZgAmzlbcMJ-zbJuNfB74w',
-	authDomain: 'pv247project.firebaseapp.com',
-	projectId: 'pv247project',
-	storageBucket: 'pv247project.appspot.com',
-	messagingSenderId: '234973118009',
-	appId: '1:234973118009:web:75331a4c71990c4fec17e8'
+	apiKey: 'AIzaSyCsDHN6jk4KxrVsvL2nc3UrdA2TJcVAbSE',
+	authDomain: 'pv247finalproject2.firebaseapp.com',
+	projectId: 'pv247finalproject2',
+	storageBucket: 'pv247finalproject2.appspot.com',
+	messagingSenderId: '414173149598',
+	appId: '1:414173149598:web:e1cf568486de762560fe8f'
 });
 
 // Authentication
 const auth = getAuth();
-
-// Sign up handler
-export const signUp = (email: string, password: string) =>
-	createUserWithEmailAndPassword(auth, email, password);
 
 // Sign in handler
 export const signIn = (email: string, password: string) =>
@@ -46,17 +44,56 @@ export const onAuthChanged = (callback: (u: User | null) => void) =>
 // Firestore
 const db = getFirestore();
 
-// Reviews collection
-export type Review = {
+// Feedbacks collection
+export type Feedback = {
 	by: string;
-	stars: number;
-	description?: string;
+	email: string;
+	text: string;
 };
 
-export const reviewsCollection = collection(
+export const feedbacksCollection = collection(
 	db,
-	'reviews'
-) as CollectionReference<Review>;
+	'feedbacks'
+) as CollectionReference<Feedback>;
 
-export const reviewsDocument = (id: string) =>
-	doc(db, 'reviews', id) as DocumentReference<Review>;
+export const feedbacksDocument = (id: string) =>
+	doc(db, 'feedbacks', id) as DocumentReference<Feedback>;
+
+export type PortfolioItem = {
+	imageUrl: string;
+	referenceUrl: string;
+	title: string;
+	shortDescription: string;
+};
+
+export const portfolioItemsCollection = collection(
+	db,
+	'portfolioItems'
+) as CollectionReference<PortfolioItem>;
+
+export const portfolioItemDocument = (id: string) =>
+	doc(db, 'portfolioItems', id) as DocumentReference<PortfolioItem>;
+
+export const addPortfolioItem = (item: PortfolioItem) =>
+	addDoc(collection(db, 'portfolioItems'), item);
+
+export const getPortfolioItems = getDocs(collection(db, 'portfolioItems'));
+
+export type AboutItem = {
+	title: string;
+	shortDescription: string;
+	created_at: Timestamp;
+};
+
+export const aboutItemsCollection = collection(
+	db,
+	'aboutItems'
+) as CollectionReference<AboutItem>;
+
+export const aboutItemDocument = (id: string) =>
+	doc(db, 'aboutItems', id) as DocumentReference<AboutItem>;
+
+export const addAboutItem = (item: AboutItem) =>
+	addDoc(collection(db, 'aboutItems'), item);
+
+export const getAboutItems = getDocs(collection(db, 'aboutItems'));
