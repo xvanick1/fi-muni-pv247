@@ -15,7 +15,7 @@ const PreviewAbout: FC<DocumentData> = ({ doc }) => {
 
 	return (
 		<Grid container item style={{ position: 'relative' }}>
-			<Grid>
+			<Grid item xs={12} sm={7} md={8}>
 				{user && (
 					<ButtonGroup
 						variant="text"
@@ -53,11 +53,18 @@ const PreviewAbout: FC<DocumentData> = ({ doc }) => {
 						</DeleteModal>
 					</ButtonGroup>
 				)}
-				<Typography gutterBottom variant="h4" component="div">
+				<Typography style={{ maxWidth: '100%' }} variant="h4" component="div">
 					{title}
 				</Typography>
-				<Divider style={{ marginBottom: '5px' }} />
-				<Typography variant="body2" color="text.secondary">
+			</Grid>
+
+			<Grid item xs={12}>
+				<Divider />
+				<Typography
+					sx={{ marginBottom: '20px' }}
+					variant="body2"
+					color="text.secondary"
+				>
 					{shortDescription}
 				</Typography>
 			</Grid>

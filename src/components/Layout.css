@@ -5,9 +5,3 @@
 .menuButton.active {
 	color: #ad4747;
 }
-
-button {
-	font-family: 'Times New Roman', Times, serif !important;
-	text-transform: none !important;
-	background-color: transparent !important;
-}

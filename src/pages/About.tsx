@@ -37,11 +37,13 @@ const About = () => {
 			<Grid item xs={12} sm={5} md={4}>
 				<Bio />
 			</Grid>
-			{aboutItems.length > 0
-				? aboutItems
-						.reverse()
-						.map(doc => <PreviewAbout key={doc.id} doc={doc} />)
-				: 'No items yet'}
+			<Grid item xs={12} sm={7} md={8}>
+				{aboutItems.length > 0
+					? aboutItems
+							.reverse()
+							.map(doc => <PreviewAbout key={doc.id} doc={doc} />)
+					: 'No items yet'}
+			</Grid>
 			<Grid
 				item
 				sx={{
