@@ -38,7 +38,7 @@ const EditAboutModal = ({ children, doc }: Props) => {
 			await setDoc(aboutItemDocument(doc.id), {
 				title,
 				shortDescription,
-				created_at: doc.created_at
+				created_at: doc.data().created_at
 			}).then(() => closeDialog());
 		} catch (err) {
 			setSubmitError((err as { message?: string })?.message ?? 'Unknown error');
