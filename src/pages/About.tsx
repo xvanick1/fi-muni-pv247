@@ -21,7 +21,7 @@ const About = () => {
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
-			query(aboutItemsCollection, orderBy('created_at')),
+			query(aboutItemsCollection, orderBy('created_at', 'asc')),
 			snapshot => {
 				setAboutItems(snapshot.docs);
 			}
