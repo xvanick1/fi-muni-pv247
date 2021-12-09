@@ -1,7 +1,7 @@
 import { onSnapshot } from '@firebase/firestore';
 import { Button, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { QueryDocumentSnapshot } from 'firebase/firestore';
+import { orderBy, query, QueryDocumentSnapshot } from 'firebase/firestore';
 import AddTwoToneIcon from '@material-ui/icons/AddTwoTone';
 
 import usePageTitle from '../hooks/usePageTitle';
@@ -20,9 +20,12 @@ const About = () => {
 	const user = useLoggedInUser();
 
 	useEffect(() => {
-		const unsubscribe = onSnapshot(aboutItemsCollection, snapshot => {
-			setAboutItems(snapshot.docs);
-		});
+		const unsubscribe = onSnapshot(
+			query(aboutItemsCollection, orderBy('created_at')),
+			snapshot => {
+				setAboutItems(snapshot.docs);
+			}
+		);
 
 		return () => {
 			unsubscribe();

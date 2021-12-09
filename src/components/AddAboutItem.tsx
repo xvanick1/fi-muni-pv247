@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import { Timestamp } from 'firebase/firestore';
 import {
 	Button,
 	Dialog,
@@ -43,7 +44,8 @@ const AddAboutItem = ({ children }: Props) => {
 		try {
 			await addAboutItem({
 				title,
-				shortDescription
+				shortDescription,
+				created_at: Timestamp.now()
 			}).then(() => closeDialog());
 		} catch (err) {
 			setSubmitError((err as { message?: string })?.message ?? 'Unknown error');

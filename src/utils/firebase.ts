@@ -13,7 +13,8 @@ import {
 	doc,
 	DocumentReference,
 	getDocs,
-	getFirestore
+	getFirestore,
+	Timestamp
 } from 'firebase/firestore';
 
 // Initialize Firebase
@@ -81,6 +82,7 @@ export const getPortfolioItems = getDocs(collection(db, 'portfolioItems'));
 export type AboutItem = {
 	title: string;
 	shortDescription: string;
+	created_at: Timestamp;
 };
 
 export const aboutItemsCollection = collection(
