@@ -46,11 +46,11 @@ const About = () => {
 			</Grid>
 			<Grid
 				item
+				marginBottom={2}
 				sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					width: '100%',
-					mb: 2
+					position: 'relative',
+					right: 0,
+					textAlign: 'right'
 				}}
 				xs={12}
 			>

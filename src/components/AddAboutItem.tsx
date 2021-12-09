@@ -68,13 +68,15 @@ const AddAboutItem = ({ children }: Props) => {
 					}}
 				>
 					<TextField
-						label="title"
+						sx={{ marginTop: 1 }}
+						label="Title"
 						autoComplete="off"
 						fullWidth
 						{...titleProps}
 					/>
 					<TextField
-						label="Short description"
+						sx={{ marginTop: 1 }}
+						label="Description"
 						autoComplete="off"
 						multiline
 						rows={5}
